@@ -6,6 +6,7 @@ class Pet:
         self.pet_type = pet_type
         self._owner=owner
         Pet.all.append(self)
+        self.type = pet_type
      
     @property
     def owner(self):
@@ -14,14 +15,15 @@ class Pet:
     def owner(self,owner):
         self._owner = owner
     @property
-    def pet_type(self):
+    def type(self):
         return self.pet_type
-    @pet_type.setter
-    def pet_type(self,pet_type):
+    @type.setter
+    def type(self,pet_type):
         if pet_type not in Pet.PET_TYPES:
             raise ValueError("pet_type not valid")
         self._pet_type = pet_type
-        
+    def __lt__(self, other):
+        return self.name < other.name   
 
 class Owner:
     def __init__(self,name):
